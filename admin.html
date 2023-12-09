@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- FONTAWESOME -->
+		<link
+			rel="shortcut icon"
+			href="./assets/img/logo/favicon.ico"
+			type="image/x-icon"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<!-- GGFONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" href="./assets/css/base.css" />
+		<link rel="stylesheet" href="./assets/css/reset.css" />
+		<link rel="stylesheet" href="./assets/css/admin.css" />
+		<!-- <link rel="stylesheet" href="./assets/css/main.css" /> -->
+		<link rel="stylesheet" href="./assets/css/responsive.css" />
+		<title>FASHION ADMIN</title>
+	</head>
+	<body>
+		<div class="wp">
+			<div class="body">
+				<div class="body-wp">
+					<div class="sidebar">
+						<div class="sb-top">
+							<div class="sb-logo">
+								<img src="./assets/img/admin/s1.png" alt="4MEN" />
+							</div>
+							<div class="sb-usr"><h3>PHAT LA TUI</h3></div>
+						</div>
+						<div class="sb-body">
+							<div class="sb-ls">
+								<div class="sb-item">
+									<div class="sb-link" onclick="showOverview()">
+										<span class="sb-icon">
+											<i class="fa fa-home"></i>
+										</span>
+										<p class="sb-title">Tổng quan</p>
+									</div>
+								</div>
+								<div class="sb-item">
+									<div class="sb-link" onclick="showPducts()">
+										<span class="sb-icon">
+											<i class="fa fa-shirt"></i>
+										</span>
+										<p class="sb-title">Sản phẩm</p>
+									</div>
+								</div>
+								<div class="sb-item">
+									<div class="sb-link" onclick="showAccs()">
+										<span class="sb-icon">
+											<i class="fa fa-user"></i>
+										</span>
+										<p class="sb-title">Tài khoản</p>
+									</div>
+								</div>
+								<div class="sb-item">
+									<div class="sb-link" onclick="showBills()">
+										<span class="sb-icon">
+											<i class="fa fa-cart-shopping"></i>
+										</span>
+										<p class="sb-title">Đơn hàng</p>
+									</div>
+								</div>
+								<div class="sb-item">
+									<div class="sb-link" onclick="showStatistic()">
+										<span class="sb-icon">
+											<i class="fa fa-chart-column"></i>
+										</span>
+										<p class="sb-title">Thống kê</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="sb-bottom">
+							<div class="btn btn--primary btn-home">Về trang chủ</div>
+							<div class="btn btn--primary btn-out-admin">Đăng xuất</div>
+						</div>
+					</div>
+					<div class="line"></div>
+					<div class="content">
+						<div class="content-top">
+							<h3>TRANG TỔNG QUAN CỦA 4MEN</h3>
+						</div>
+						<div class="content-body">
+							<div class="overview">
+								<div class="overview-wp">
+									<div class="ow-ls">
+										<div class="ow-item item-3">
+											<div class="ow-top">
+												<h3
+													class="ow-heading ow-heading--customer"
+												></h3>
+											</div>
+											<div class="ow-thump">
+												<img
+													src="./assets/img/admin/s1.png"
+													alt="KHÁCH HÀNG"
+												/>
+											</div>
+											<div class="ow-bottom">
+												<h3 class="ow-title">Khách hàng</h3>
+												<p class="ow-desc">
+													Khách hàng mục tiêu là một nhóm đối tượng
+													khách hàng trong phân khúc thị trường mục
+													tiêu mà doanh nghiệp bạn đang hướng tới.
+												</p>
+											</div>
+										</div>
+										<div class="ow-item item-3">
+											<div class="ow-top">
+												<h3
+													class="ow-heading ow-heading--pduct"
+												></h3>
+											</div>
+											<div class="ow-thump">
+												<img
+													src="./assets/img/admin/s2.png"
+													alt="KHÁCH HÀNG"
+												/>
+											</div>
+											<div class="ow-bottom">
+												<h3 class="ow-title">Sản phẩm</h3>
+												<p class="ow-desc">
+													Sản phẩm là bất cứ cái gì có thể đưa vào
+													thị trường để tạo sự chú ý, mua sắm, sử
+													dụng hay tiêu dùng nhằm thỏa mãn một nhu
+													cầu hay ước muốn. Nó có thể là những vật
+													thể, dịch vụ, con người, địa điểm, tổ
+													chức hoặc một ý tưởng.
+												</p>
+											</div>
+										</div>
+										<div class="ow-item item-3">
+											<div class="ow-top">
+												<h3
+													class="ow-heading ow-heading--bills"
+												></h3>
+											</div>
+											<div class="ow-thump">
+												<img
+													src="./assets/img/admin/s3.png"
+													alt="DOANH THU"
+												/>
+											</div>
+											<div class="ow-bottom">
+												<h3 class="ow-title">Doanh thu</h3>
+												<p class="ow-desc">
+													Doanh thu của doanh nghiệp là toàn bộ số
+													tiền sẽ thu được do tiêu thụ sản phẩm,
+													cung cấp dịch vụ với sản lượng.
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="modal" class="">
+			<div class="modal__content">
+				<div class="modal__header">
+					<div class="modal__close">
+						<i class="fa fa-close"></i>
+					</div>
+				</div>
+				<div class="modal__body">
+					<!-- <div class="detail">
+						<div class="detail-wp">
+							<div class="detail-top">
+								<h3>CHI TIẾT ĐƠN HÀNG</h3>
+							</div>
+							<div class="--separate-horizontal"></div>
+							<div class="detail-body">
+								<div class="detail-body-wp">
+									<table width="100%">
+										<thead>
+											<tr>
+												<th>MÃ ĐƠN HÀNG</th>
+												<th>SỐ LƯỢNG</th>
+												<th>ĐƠN GIÁ</th>
+												<th>NGÀY MUA</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>MH11</td>
+												<td>2</td>
+												<td>180.000Đ</td>
+												<td class="min-w-120">dd/mm/yyyy</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div id="toast"></div>
+	</body>
+
+	<!-- <script src="./js/main.js"></script> -->
+	<script src="./js/initialization.js"></script>
+	<script src="./js/lib.js"></script>
+	<script src="./js/toast.js"></script>
+	<script src="./js/admin.js"></script>
+</html>

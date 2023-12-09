@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- FONTAWESOME -->
+		<link
+			rel="shortcut icon"
+			href="./assets/img/logo/favicon.ico"
+			type="image/x-icon"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<!-- GGFONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- CSS -->
+		<link rel="stylesheet" href="./assets/css/base.css" />
+		<link rel="stylesheet" href="./assets/css/reset.css" />
+		<link rel="stylesheet" href="./assets/css/main.css" />
+		<link rel="stylesheet" href="./assets/css/responsive.css" />
+		<title>FASHION</title>
+	</head>
+	<body>
+		<div class="wp">
+			<div class="topbar">
+				<div class="container">
+					<!-- tp = topbar -->
+					<div class="tp-wp">
+						<div class="tp__left">
+							<div class="tp__left-hline">
+								<i class="fa fa-phone tp__left-icon"></i>
+								Hotline:
+								<a href="tel:0123456789" class="tp__left-phone"
+									>0123 456 789
+								</a>
+							</div>
+						</div>
+						<div class="tp__right">
+							<div class="tp__right-nav">
+								<ul class="tp__right-menu">
+									<li class="tp__right-item" onclick="showIntroduce()">
+										<div class="tp__right-link">Giới thiệu</div>
+									</li>
+									<li class="tp__right-item" onclick="showSizeChart()">
+										<div class="tp__right-link">Cách chọn size</div>
+									</li>
+								</ul>
+							</div>
+							<!-- topbar user -->
+							<div class="tp-usr">
+								<div class="tp-usr-wp">
+									<span class="tp-usr-icon">
+										<i class="fa fa-user"></i>
+									</span>
+									<div class="tp-usr-acc">
+										<div class="tp-usr-heading">
+											<h3 class="tp-usr-name">Tài khoản</h3>
+											<i class="fa fa-angle-down"></i>
+										</div>
+										<div class="tp-usr-ls">
+											<div
+												class="tp-usr-item tp-usr-item--login"
+												onclick="showModalLogin()"
+											>
+												Đăng nhập
+											</div>
+											<div
+												class="tp-usr-item tp-usr-item--sign-up"
+												onclick="showModalSignUp()"
+											>
+												Đăng ký
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- btn login -->
+							<button class="btn btn--primary tp-login">
+								Đăng nhập
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="navbar">
+				<div class="mobile">
+					<div class="mobile-overlay"></div>
+					<div class="mobile-nav">
+						<div class="mn-close">
+							<i class="fa fa-xmark"></i>
+						</div>
+						<div class="mobile-nav-wp">
+							<ul class="mn-menu">
+								<li class="mn-item">
+									<a href="#" class="mn-link">HÀNG MỚI VỀ</a>
+								</li>
+								<!-- --has-sub-menu = có menu con -->
+								<li class="mn-item --has-sub-menu">
+									<a href="#" class="mn-link">ÁO NAM</a>
+									<ul class="mn-sub-menu">
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Áo thun</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Áo sơ mi</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Áo polo</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Áo khoác</a>
+										</li>
+									</ul>
+								</li>
+								<!-- --has-sub-menu = có menu con -->
+								<li class="mn-item --has-sub-menu">
+									<a href="#" class="mn-link">QUẦN NAM</a>
+									<ul class="mn-sub-menu">
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Quần tây</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Quần short</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Quần jeans</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Quần jogger</a>
+										</li>
+									</ul>
+								</li>
+								<!-- --has-sub-menu = có menu con -->
+								<li class="mn-item --has-sub-menu">
+									<a href="#" class="mn-link">GIÀY DÉP</a>
+									<ul class="mn-sub-menu">
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Giày</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Dép nam</a>
+										</li>
+										<li class="mn-sub-item">
+											<a href="#" class="mn-sub-link">Sandal</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<!-- nb = navbar -->
+					<div class="nb-wp">
+						<div class="nb-main">
+							<!--  -->
+							<!-- NAVBAR LEFT -->
+							<!--  -->
+							<div class="nb__left">
+								<a href="index.html" class="nb__left-logo">
+									<img
+										src="./assets/img/logo/logo.png"
+										alt="Logo 4Men"
+										class="nb__left-img"
+									/>
+								</a>
+							</div>
+							<!--  -->
+							<!-- NAVBAR CENTER -->
+							<!--  -->
+							<div class="nb__center">
+								<div class="nb__center-nav">
+									<ul class="nb__center-menu">
+										<li class="nb__center-item">
+											<a href="#" class="nb__center-link"
+												>HÀNG MỚI VỀ</a
+											>
+											<span class="nb__center-tag">HOT</span>
+										</li>
+										<!-- --has-sub-menu = có menu con -->
+										<li class="nb__center-item --has-sub-menu">
+											<a href="#" class="nb__center-link">ÁO NAM</a>
+											<ul class="nb__center-sub-menu">
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Áo thun</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Áo sơ mi</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Áo polo</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Áo khoác</a
+													>
+												</li>
+											</ul>
+										</li>
+										<!-- --has-sub-menu = có menu con -->
+										<li class="nb__center-item --has-sub-menu">
+											<a href="#" class="nb__center-link"
+												>QUẦN NAM</a
+											>
+											<ul class="nb__center-sub-menu">
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Quần tây</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Quần short</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Quần jeans</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Quần jogger</a
+													>
+												</li>
+											</ul>
+										</li>
+										<!-- --has-sub-menu = có menu con -->
+										<li class="nb__center-item --has-sub-menu">
+											<a href="#" class="nb__center-link"
+												>GIÀY DÉP</a
+											>
+											<ul class="nb__center-sub-menu">
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Giày</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Dép nam</a
+													>
+												</li>
+												<li class="nb__center-sub-item">
+													<a href="#" class="nb__center-sub-link"
+														>Sandal</a
+													>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!--  -->
+							<!-- NAVBAR RIGHT -->
+							<!--  -->
+							<div class="nb__right">
+								<div class="nb__right-wp">
+									<div class="nb__right-main">
+										<!--  -->
+										<!-- SEARCH -->
+										<!--  -->
+										<div class="nb__right-search-wp">
+											<div class="nb__right-search">
+												<div class="nb__right-inp">
+													<input
+														class="nb__right-form-inp"
+														type="text"
+														placeholder="Tìm kiếm..."
+													/>
+												</div>
+												<div class="nb__right-btn-search">
+													<i class="fa fa-search"></i>
+												</div>
+											</div>
+										</div>
+										<!--  -->
+										<!-- CART -->
+										<!--  -->
+										<div class="nb__right-cart-wp">
+											<div class="nb__right-cart-btn">
+												<i class="fa fa-cart-shopping"></i>
+											</div>
+											<div class="nb__right-cart">
+												<div class="nb__right-cart-list-wp">
+													<h3 class="nb__right-cart-top">
+														Có
+														<p
+															class="nb__right-cart-top-quantity"
+														>
+															0
+														</p>
+														sản phẩm trong giỏ hàng
+													</h3>
+													<!--  -->
+													<!-- giỏ hàng -->
+													<!--  -->
+													<div class="nb__right-cart-body">
+														<ul class="nb__right-cart-list"></ul>
+													</div>
+													<div class="nb__right-cart-bottom">
+														<div class="nb__right-cart-total-wp">
+															Tổng:
+															<p
+																class="nb__right-cart-bottom-price"
+															>
+																0
+															</p>
+														</div>
+														<button
+															class="btn btn--primary nb__right-cart-btn-pay"
+														>
+															Thanh toán
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--  -->
+										<!-- CART -->
+										<!--  -->
+										<div class="nb__right-bars-wp">
+											<div class="nb__right-bars-btn --btn-open">
+												<i class="fa fa-bars"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="content">
+				<div class="slider">
+					<div class="slider-wp">
+						<i class="fa fa-angle-left slider-prev"></i>
+						<div class="slider-main-wp">
+							<div class="slider-main">
+								<div class="slider-item">
+									<img
+										src="./assets/img/banner/banner-1.jpg"
+										alt="Banner 1"
+										class="slider-img"
+									/>
+								</div>
+								<div class="slider-item">
+									<img
+										src="./assets/img/banner/banner-2.jpg"
+										alt="Banner 2"
+										class="slider-img"
+									/>
+								</div>
+								<div class="slider-item">
+									<img
+										src="./assets/img/banner/banner-3.jpg"
+										alt="Banner 3"
+										class="slider-img"
+									/>
+								</div>
+							</div>
+						</div>
+						<ul class="slider-dots">
+							<li data-index="0" class="slider-dot-item active"></li>
+							<li data-index="1" class="slider-dot-item"></li>
+							<li data-index="2" class="slider-dot-item"></li>
+						</ul>
+						<i class="fa fa-angle-right slider-next"></i>
+					</div>
+				</div>
+				<div class="products-hot">
+					<div class="container">
+						<div class="products-heading">
+							<h4>THỜI TRANG HOT NHẤT</h4>
+						</div>
+						<div class="products-list products-hot-list">
+							<!-- showModalBuy(${product.id}) -->
+						</div>
+					</div>
+				</div>
+				<div class="category">
+					<div class="container">
+						<div class="category-wp">
+							<div class="category-left">
+								<div class="category-item">
+									<!-- <a href="" class="category-link"> -->
+									<img
+										src="./assets/img/banner/category-polo.jpg"
+										alt=""
+										class="category-img"
+									/>
+									<!-- </a> -->
+								</div>
+							</div>
+							<div class="category-mid">
+								<div class="category-item">
+									<!-- <a href="" class="category-link"> -->
+									<img
+										src="./assets/img/banner/category-middle.jpg"
+										alt=""
+										class="category-img"
+									/>
+									<!-- </a> -->
+								</div>
+							</div>
+							<div class="category-right">
+								<div class="category-item">
+									<!-- <a href="" class="category-link"> -->
+									<img
+										src="./assets/img/banner/category-right.jpg"
+										alt=""
+										class="category-img"
+									/>
+									<!-- </a> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="products-new">
+					<div class="container">
+						<div class="products-heading">
+							<h4>THỜI TRANG MỚI NHẤT</h4>
+						</div>
+						<div class="products-list products-new-list"></div>
+					</div>
+				</div>
+				<div class="products-best-seller">
+					<div class="container">
+						<div class="products-heading">
+							<h4>THỜI TRANG BÁN CHẠY NHẤT</h4>
+						</div>
+						<div class="products-list products-best-seller-list"></div>
+					</div>
+				</div>
+			</div>
+			<div class="separate">
+				<div class="container">
+					<div class="separate-main"></div>
+				</div>
+			</div>
+			<div class="policy">
+				<div class="container">
+					<div class="policy-wp">
+						<div class="policy-item">
+							<div class="policy-item__heading">
+								<p class="policy-item__heading-icon">
+									<i class="fa fa-plane"></i>
+								</p>
+								<p class="policy-item__heading-title">
+									THANH TOÁN & GIAO HÀNG
+								</p>
+							</div>
+							<div class="policy-item__body">
+								<p class="policy-item__body-title">
+									Miễn phí vận chuyển cho đơn hàng trên 399.000 VNĐ
+								</p>
+								<ul class="policy-item__body-list">
+									<li class="policy-item__body-item">
+										- Giao hàng và thu tiền tận nơi
+									</li>
+									<li class="policy-item__body-item">
+										- Chuyển khoản và giao hàng
+									</li>
+									<li class="policy-item__body-item">
+										- Mua hàng tại shop
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="policy-item">
+							<div class="policy-item__heading">
+								<p class="policy-item__heading-icon">
+									<i class="fa fa-id-card"></i>
+								</p>
+								<p class="policy-item__heading-title">THẺ THÀNH VIÊN</p>
+							</div>
+							<div class="policy-item__body">
+								<p class="policy-item__body-title">
+									Chế độ ưu đãi thành viên VIP
+								</p>
+								<ul class="policy-item__body-list">
+									<li class="policy-item__body-item">
+										- 5% cho thành viên Bạc
+									</li>
+									<li class="policy-item__body-item">
+										- 10% cho thành viên Vàng
+									</li>
+									<li class="policy-item__body-item">
+										- 15% cho thành viên Kim cương
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="policy-item">
+							<div class="policy-item__heading">
+								<p class="policy-item__heading-icon">
+									<i class="fa fa-plane"></i>
+								</p>
+								<p class="policy-item__heading-title">GIỜ MỞ CỬA</p>
+							</div>
+							<div class="policy-item__body">
+								<p class="policy-item__body-title">
+									Thời gian 8h30 đến 22:00
+								</p>
+								<ul class="policy-item__body-list">
+									<li class="policy-item__body-item">
+										- Tất cả các ngày trong tuần
+									</li>
+									<li class="policy-item__body-item">
+										- Áp dụng cho tất cả các chi nhánh hệ thống cửa
+										hàng 4MEN
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="policy-item">
+							<div class="policy-item__heading">
+								<p class="policy-item__heading-icon">
+									<i class="fa fa-headphones"></i>
+								</p>
+								<p class="policy-item__heading-title">HỖ TRỢ 24/7</p>
+							</div>
+							<div class="policy-item__body">
+								<p class="policy-item__body-title">
+									Gọi ngay cho chúng tôi khi bạn có thắc mắc
+								</p>
+								<ul class="policy-item__body-list">
+									<li class="policy-item__body-item">
+										- 0868.444.644
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="container">
+					<div class="footer-wp">
+						<div class="footer-widgets">
+							<div class="fw__block">
+								<div class="fw-heading">
+									<img
+										src="./assets/img/logo/logo-footer.png"
+										alt=""
+										class="fw-img"
+									/>
+								</div>
+								<ul class="fw-list">
+									<li class="fw-item">
+										<a href="#" class="fw-link">Giới thiệu</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link">Liên hệ</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link">Tuyển dụng</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link">Tin tức</a>
+									</li>
+									<li></li>
+									<li class="fw-item">
+										<i class="fa fa-envelope"></i>
+										Email:
+										<a
+											href="mailto: demo123@gmail.com"
+											class="fw-link"
+										>
+											demo123@gmail.com
+										</a>
+									</li>
+									<li class="fw-item">
+										<i class="fa fa-phone"></i>
+										Hotline:
+										<a href="tel: 123456789" class="fw-link"
+											>123456789</a
+										>
+									</li>
+								</ul>
+
+								<div class="fw-mail">
+									<form action="" class="fw-form">
+										<label for="mailSale"
+											>Đăng ký nhận mail khuyến mãi</label
+										>
+										<input
+											type="text"
+											id="mailSale"
+											placeholder="Nhập email của bạn"
+										/>
+										<button class="btn btn--primary btn--unradius">
+											Đăng ký
+										</button>
+									</form>
+								</div>
+							</div>
+							<div class="fw__block">
+								<div class="fw-heading">
+									<h3>HỖ TRỢ KHÁCH HÀNG</h3>
+								</div>
+								<ul class="fw-list">
+									<li class="fw-item">
+										<a href="#" class="fw-link">Huớng dẫn đặt hàng</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link"
+											>Hướng dẫn chọn size</a
+										>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link">Câu hỏi thường gặp</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link">
+											Chính sách đổi hàng
+										</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link">
+											Chính sách bảo mật
+										</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link">
+											Chính sách cookie
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="fw__block">
+								<div class="fw-heading">
+									<h3>HỆ THỐNG CỬA HÀNG</h3>
+								</div>
+								<ul class="fw-list">
+									<li class="fw-item">
+										<a href="#" class="fw-link fw-link-map">
+											<img
+												src="./assets/img/banner/footer-map.jpg"
+												alt=""
+											/>
+										</a>
+									</li>
+									<li class="fw-item">
+										<a href="#" class="fw-link"
+											>Tìm địa chỉ cửa hàng gần bạn</a
+										>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="footer-license">
+							<div class="fl-left">
+								<h3 class="fl-heading">
+									Copyright 2023 · Thiết kế và phát triển bởi
+									<a href="#" class="fl-link"> 4MEN SHOP </a>
+									All rights reserved
+								</h3>
+								<p>Chủ quản: anh Nguyễn Thanh Sang đẹp chai</p>
+								<p>MST cá nhân: 0312028096</p>
+								<p>
+									Số ĐKKD: 41G8031109 do UBND Quận 7 - Tp.HCM cấp ngày
+									05/06/2017
+								</p>
+								<h3 class="fl-brand">
+									Nhãn hiệu "4MEN" đã được đăng kí độc quyền tại Cục sở
+									hữu trí tuệ Việt Nam
+								</h3>
+							</div>
+							<div class="fl-right">
+								<img src="./assets/img/banner/gov.png" alt="" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<!-- BACK TO TOP -->
+			<!--  -->
+			<div class="back-to-top" onclick="handleBackToTop()">
+				<i class="fa fa-angle-up"></i>
+			</div>
+		</div>
+		<div id="modal" class="">
+			<div class="modal__content">
+				<div class="modal__header">
+					<div class="modal__close">
+						<i class="fa fa-close"></i>
+					</div>
+				</div>
+				<div class="modal__body">
+					<!-- <div class="ordered">
+						<div class="ordered-wp">
+							<div class="ordered-top">
+								<h3 class="ordered-heading">LỊCH SỬ ĐƠN HÀNG</h3>
+							</div>
+							<div class="ordered-separate --separate-horizontal"></div>
+							<div class="ordered-body">
+								<div class="ordered-ls">
+									<h2 class="ordered-empty">
+										BẠN CHƯA CÓ ĐƠN HÀNG NÀO ĐÃ ĐẶT
+									</h2>
+									<div class="ordered-item">
+										<div class="ordered-product">
+											<div class="ordered-img">
+												<img
+													src="./assets/img/aokhoac/aokhoac-1.jpg"
+													alt="Ao khoac"
+												/>
+											</div>
+											<div class="ordered-info">
+												<h3 class="ordered-name">
+													Áo Sweatshirt Tổ Ong Regular Túi Mổ AS003
+												</h3>
+												<p class="ordered-price">
+													Giá: <span>295.000đ</span>
+												</p>
+												<p class="ordered-size">
+													Size: <span>S</span>
+												</p>
+												<p class="ordered-quantity">
+													Số lượng: <span>1</span>
+												</p>
+											</div>
+										</div>
+										<div class="btn btn--primary ordered-buy-again">
+											Mua lại
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			<!-- <div class="modal__overlay"></div> -->
+		</div>
+		<div id="toast"></div>
+	</body>
+	<script src="./js/lib.js"></script>
+	<script src="./js/toast.js"></script>
+	<script src="./js/initialization.js"></script>
+	<script src="./js/main.js"></script>
+</html>
