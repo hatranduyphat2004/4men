@@ -371,19 +371,32 @@ function handleFilterDateOrder() {
 	cartTable.innerHTML = '';
 	renderCarts(ordersFiltered, cartTable);
 }
-function handleChangeStatusCart(idOrder) {
-	const accounts = JSON.parse(localStorage.getItem('accounts'));
-	let cartsOrderedInAcc = [];
-	accounts.forEach((item) => {
-		cartsOrderedInAcc.push(item.orderedCarts);
-	});
+function handleChangeStatusCart(idLs) {
+	//idLs = [idOrder, idAccount]
 	if (confirm('Bạn đã kiểm tra kĩ đơn hàng')) {
-		cartsOrderedInAcc
-			.flat()
-			.find((item) => item.idOrder === idOrder).isConfirm = true;
+		let idData = idLs.split(',');
+		//
+		const accounts = JSON.parse(localStorage.getItem('accounts'));
+		let orderedLsInAcc = accounts.find(
+			(acc) => acc.id == idData[1]
+		).orderedCarts;
+		orderedLsInAcc.find(
+			(order) => order.idOrder === idData[0]
+		).isConfirm = true;
 		localStorage.setItem('accounts', JSON.stringify(accounts));
 		showBills();
 	}
+	// console.log(orderedLsInAcc);
+	// accounts.forEach((item) => {
+	// 	cartsOrderedInAcc.push(item.orderedCarts);
+	// });
+	// if (confirm('Bạn đã kiểm tra kĩ đơn hàng')) {
+	// 	cartsOrderedInAcc
+	// 		.flat()
+	// 		.find((item) => item.idOrder === idOrder).isConfirm = true;
+	// 	localStorage.setItem('accounts', JSON.stringify(accounts));
+
+	// }
 }
 function showOverview() {
 	contentBody.innerHTML = '';
@@ -1195,7 +1208,7 @@ function renderCarts(cartsShow, cartsContainer) {
 			: `
 				<button
 					class="btn cart-status"
-					onclick="handleChangeStatusCart('${cart.idOrder}')"
+					onclick="handleChangeStatusCart('${cart.idOrder},${cart.idAccount}')"
 				>
 					Chưa xử lí
 				</button>

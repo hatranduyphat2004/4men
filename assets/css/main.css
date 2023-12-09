@@ -1913,6 +1913,24 @@
 	font-size: 1.3rem;
 	font-weight: 400;
 }
+.ordered-item-cancel {
+	display: flex;
+	align-items: center;
+	font-size: 1.1rem;
+	font-weight: 500;
+	padding: 4px 6px;
+	color: var(--grey-light-color);
+	background-color: var(--red-color);
+	border-radius: 4px;
+	border: 1px solid var(--red-color);
+	transition: 0.25s linear;
+}
+.ordered-item-cancel:hover {
+	cursor: pointer;
+	background-color: var(--grey-light-color);
+	color: var(--red-color);
+	border: 1px solid var(--red-color);
+}
 .ordered-item-total {
 	font-size: 1.4rem;
 	line-height: 2.4rem;

@@ -464,6 +464,7 @@ function checkLoginToShow(nameAcc) {
 	}
 }
 // *** LỊCH SỬ ĐƠN HÀNG
+showHistoryOrder();
 function showHistoryOrder() {
 	handleHideModal();
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
@@ -492,6 +493,12 @@ function showHistoryOrder() {
 		let orderedProducts = ``;
 		let orderedCarts = ``;
 		historyCarts.forEach((item) => {
+			console.log(item);
+			let btnCancelOrder = item.isConfirm
+				? ''
+				: `
+					<div class=" ordered-item-cancel" onclick="handleCancelOrder('${item.idOrder}')">Hủy đơn hàng</div>`;
+
 			orderedProducts = ``;
 			item.carts.map((product) => {
 				orderedProducts += `
@@ -569,6 +576,7 @@ function showHistoryOrder() {
 									</div>
 								</div>
 							</div>
+							${btnCancelOrder}
 						</div>
 						<p class="ordered-item-total">Tổng tiền: <span>${convertFormatPrice(
 							item.totalPrice
@@ -581,6 +589,28 @@ function showHistoryOrder() {
 	}
 
 	handleShowModal();
+}
+function handleCancelOrder(idCancel) {
+	if (confirm('Bạn chắc chắn hủy đơn hàng')) {
+		let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
+		let accounts = JSON.parse(localStorage.getItem('accounts'));
+		//
+		let indexCancelOrder = currentAccount.orderedCarts.findIndex(
+			(order) => order.idOrder === idCancel
+		);
+		currentAccount.orderedCarts.splice(indexCancelOrder, 1);
+		accounts.find((acc) => acc.id === currentAccount.id).orderedCarts =
+			currentAccount.orderedCarts;
+		localStorage.setItem('currentAccount', JSON.stringify(currentAccount));
+		localStorage.setItem('accounts', JSON.stringify(accounts));
+		showHistoryOrder();
+		toast({
+			title: 'Hủy đơn hàng',
+			message: 'Bạn đã hủy đơn hàng thành công',
+			type: 'success',
+			duration: 3000,
+		});
+	}
 }
 function handleShowDetail(item) {
 	if (
