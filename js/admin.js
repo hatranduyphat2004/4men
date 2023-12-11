@@ -1114,7 +1114,9 @@ function showDetailCart(idOrder) {
 		.flat()
 		.find((item) => item.idOrder === idOrder);
 	let orderedLs = ``;
+	let totalPrice = 0;
 	orderedShowDetail.carts.forEach((cart) => {
+		totalPrice += parseInt(cart.price) * parseInt(cart.quantity);
 		orderedLs += `
 		<div class="detail-item">
 			<div class="detail-img">
@@ -1154,6 +1156,9 @@ function showDetailCart(idOrder) {
 							${orderedLs}
 						</div>
 				</div>
+			</div>
+			<div class="detail-bottom">
+				Tổng tiền: <p>${convertFormatPrice(totalPrice)}</p>
 			</div>
 		</div>
 	</div>

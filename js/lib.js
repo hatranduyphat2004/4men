@@ -51,6 +51,7 @@ Validator.isPhone = function (selector) {
 		selector,
 		test(value) {
 			let regex = /^\d{10}$/;
+			// let regex = /^0(1d{9}|9d{8})$/;
 			return value.match(regex) ? undefined : 'Số điện thoại không hợp lệ';
 		},
 	};

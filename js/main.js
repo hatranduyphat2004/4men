@@ -464,7 +464,6 @@ function checkLoginToShow(nameAcc) {
 	}
 }
 // *** LỊCH SỬ ĐƠN HÀNG
-showHistoryOrder();
 function showHistoryOrder() {
 	handleHideModal();
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
