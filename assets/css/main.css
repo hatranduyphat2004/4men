@@ -1236,6 +1236,7 @@
 	font-size: 1.3rem;
 	font-weight: 400;
 	transition: 0.25s linear;
+	min-width: 80px;
 }
 .tp-usr-heading i {
 	transition: 0.25s linear;

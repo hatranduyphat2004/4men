@@ -199,9 +199,9 @@ function showIntroduce() {
 	content.innerHTML = `<div class="intro">
 	<div class="container">
 		<div class="intro-wp">
-			<h2 class="intro-heading">Giới thiệu 4MEN</h2>
+			<h2 class="intro-heading">Giới thiệu VSTYLE</h2>
 			<p class="intro-content">
-				Thương hiệu thời trang nam 4MEN được thành lập từ tháng
+				Thương hiệu thời trang nam VSTYLE được thành lập từ tháng
 				10 năm 2023, là thương hiệu thời trang uy tín hàng đầu
 				tại Việt Nam dành riêng cho phái mạnh.
 			</p>
@@ -211,26 +211,26 @@ function showIntroduce() {
 				các khâu dịch vụ, nhằm mang đến cho Quý Khách Hàng những
 				trải nghiệm mua sắm đặc biệt nhất: sản phẩm chất lượng -
 				dịch vụ hoàn hảo - xu hướng thời trang mới mẻ và tinh
-				tế. Thông qua các sản phẩm thời trang, 4MEN luôn mong
+				tế. Thông qua các sản phẩm thời trang, VSTYLE luôn mong
 				muốn truyền tải đến bạn những thông điệp tốt đẹp cùng
 				với nguồn cảm hứng trẻ trung và tích cực.
 			</p>
 			<h3 class="intro-title">TẦM NHÌN</h3>
 			<p class="intro-content">
 				Với mục tiêu xây dựng và phát triển những giá trị bền
-				vững, trong những năm tới, 4MEN sẽ trở thành thương hiệu
+				vững, trong những năm tới, VSTYLE sẽ trở thành thương hiệu
 				dẫn đầu về thời trang phái mạnh trên thị trường Việt
 				Nam.
 			</p>
-			<h3 class="intro-title">THÔNG ĐIỆP 4MEN GỬI ĐẾN BẠN</h3>
+			<h3 class="intro-title">THÔNG ĐIỆP VSTYLE GỬI ĐẾN BẠN</h3>
 			<p class="intro-content">
-				4MEN muốn truyền cảm hứng tích cực đến các chàng trai:
+				VSTYLE muốn truyền cảm hứng tích cực đến các chàng trai:
 				Việc mặc đẹp rất quan trọng, nó thể hiện được cá tính,
 				sự tự tin và cả một phần lối sống, cách suy nghĩ của bản
 				thân. Mặc thanh lịch, sống thanh lịch.
 			</p>
 			<h3 class="intro-title">
-				Chọn 4MEN, bạn đang lựa chọn sự hoàn hảo cho điểm nhấn
+				Chọn VSTYLE, bạn đang lựa chọn sự hoàn hảo cho điểm nhấn
 				thời trang của chính mình!
 			</h3>
 		</div>
@@ -246,7 +246,7 @@ function showSizeChart() {
 			<p class="szchart-content">
 				Nếu bạn băn khoăn không biết chọn size nào cho phù hợp
 				với cân nặng và chiều cao của mình, đừng lo lắng! Hãy
-				xem bảng hướng dẫn chọn size bên dưới mà 4MEN tư vấn
+				xem bảng hướng dẫn chọn size bên dưới mà VSTYLE tư vấn
 				riêng dành cho bạn
 			</p>
 			<img src="./assets/img/chart1.png" alt="Size chart áo" />
@@ -254,13 +254,13 @@ function showSizeChart() {
 			<img src="./assets/img/chart3.jpg" alt="Size chart giày" />
 			<p class="szchart-content">
 				Bảng hướng dẫn chọn size trên là bảng hướng dẫn dựa trên
-				kinh nghiệm nhiều năm của 4MEN theo khảo sát nhu cầu sở
+				kinh nghiệm nhiều năm của VSTYLE theo khảo sát nhu cầu sở
 				thích của khách hàng, tất nhiên sẽ không tuyệt đối, sẽ
 				có những trường hợp ngoại lệ phụ thuộc theo vóc dáng, sở
 				thích của từng người. Ví dụ có người thích mặc ôm, có
 				người thích mặc rộng... Nếu bạn vẫn còn có những mắc
 				thắc và băn khoăn cần được giải đáp? Hãy liên hệ ngay
-				với Bộ phận Chăm sóc khách hàng của 4MEN qua Hotline
+				với Bộ phận Chăm sóc khách hàng của VSTYLE qua Hotline
 				(08)68 444 644 để được hỗ trợ thêm.
 			</p>
 		</div>
@@ -434,7 +434,10 @@ function showModalLogin() {
 	});
 
 	modal.addEventListener('keypress', (e) => {
-		if (e.key === 'Enter') login();
+		if (e.key === 'Enter') {
+			login();
+			e.stopPropagation();
+		}
 	});
 
 	handleShowModal();
