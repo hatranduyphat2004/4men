@@ -301,7 +301,7 @@ btnPay.addEventListener('click', () => {
 			title: 'Không thể thanh toán',
 			message: 'Hãy đăng nhập để thanh toán',
 			type: 'warning',
-			duration: 3000,
+			duration: 2000,
 		});
 	}
 });
@@ -343,14 +343,14 @@ function login() {
 				checkLoginToShow(accLogin.fullname);
 			}
 
+			// hiển thị giỏ hàng của user hiện tại
 			renderCarts(accLogin.carts);
 			handleHideModal();
-			// hiển thị giỏ hàng của user hiện tại
 			toast({
 				title: 'Đăng nhập thành công',
 				message: 'Đăng nhập tài khoản thành công',
 				type: 'success',
-				duration: 3000,
+				duration: 2000,
 			});
 		} else {
 			document.querySelector('.form-message.--login-fail').innerText =
@@ -433,12 +433,12 @@ function showModalLogin() {
 		],
 	});
 
-	modal.addEventListener('keypress', (e) => {
-		if (e.key === 'Enter') {
-			login();
-			e.stopPropagation();
-		}
-	});
+	// modal.addEventListener('keypress', (e) => {
+	// 	if (e.key === 'Enter') {
+	// 		handleHideModal();
+	// 		login();
+	// 	}
+	// });
 
 	handleShowModal();
 }
@@ -610,7 +610,7 @@ function handleCancelOrder(idCancel) {
 			title: 'Hủy đơn hàng',
 			message: 'Bạn đã hủy đơn hàng thành công',
 			type: 'success',
-			duration: 3000,
+			duration: 2000,
 		});
 	}
 }
@@ -843,7 +843,7 @@ function signUp() {
 				message:
 					'Đăng kí tài khoản thành công hãy đăng nhập để mua sắm thỏa thích',
 				type: 'success',
-				duration: 3000,
+				duration: 2000,
 			});
 			handleHideModal();
 		} else {
@@ -852,7 +852,7 @@ function signUp() {
 				message:
 					'Tên đăng đăng nhập hoặc số điện thoại của bạn có thể đã bị trùng vui lòng nhập lại',
 				type: 'warning',
-				duration: 3000,
+				duration: 2000,
 			});
 		}
 	} else {
@@ -882,7 +882,7 @@ function logout() {
 			title: 'Đăng xuất',
 			message: 'Đăng xuất tài khoản',
 			type: 'info',
-			duration: 3000,
+			duration: 2000,
 		});
 	}
 }
@@ -1187,7 +1187,7 @@ function pay() {
 			title: 'Thanh toán thành công',
 			message: 'Bạn đã thanh toán giỏ hàng thành công',
 			type: 'success',
-			duration: 3000,
+			duration: 2000,
 		});
 	} else {
 		const inpEles = document.querySelectorAll('.pay-form-inp');
@@ -1613,7 +1613,7 @@ function addCart(id) {
 			title: 'Không thể mua sắm',
 			message: 'Hãy đăng nhập để có thể mua sắm với nhiều ưu đãi hơn ',
 			type: 'warning',
-			duration: 3000,
+			duration: 2000,
 		});
 		handleHideModal();
 	}
@@ -1630,7 +1630,7 @@ function payNow(id) {
 			title: 'Không thể mua sắm',
 			message: 'Hãy đăng nhập để có thể mua sắm với nhiều ưu đãi hơn ',
 			type: 'warning',
-			duration: 3000,
+			duration: 2000,
 		});
 		handleHideModal();
 	}
@@ -2186,7 +2186,7 @@ function handleConfirmEditPass() {
 		title: 'Đổi mật khẩu thành công',
 		message: 'Bạn đã đổi mật khẩu thành công',
 		type: 'success',
-		duration: 3000,
+		duration: 2000,
 	});
 }
 function handleEditPassword() {
