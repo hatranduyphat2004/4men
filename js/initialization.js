@@ -1504,7 +1504,7 @@ function createAccounts() {
 			{
 				id: 2,
 				fullname: 'Bùi Hữu Luân',
-				phone: '0000000000',
+				phone: '0878678691',
 				username: 'luan',
 				password: 'Luan@2003',
 				mail: 'buihuuluan2003@gmail.com',
@@ -1518,7 +1518,7 @@ function createAccounts() {
 			{
 				id: 3,
 				fullname: 'Nguyễn Hoàng Tuấn Kiệt',
-				phone: '1111111111',
+				phone: '0928227537',
 				username: 'kiet',
 				password: 'Kiet@2004',
 				mail: 'nguyenhoangtuankiet2004@gmail.com',
@@ -1532,7 +1532,7 @@ function createAccounts() {
 			{
 				id: 4,
 				fullname: 'Võ Thế Lực',
-				phone: '2222222222',
+				phone: '0914721526',
 				username: 'luc',
 				password: 'Luc@2004',
 				mail: 'votheluc2004@gmail.com',
@@ -1546,7 +1546,7 @@ function createAccounts() {
 			{
 				id: 5,
 				fullname: 'Mai Lê Mỹ Linh',
-				phone: '3333333333',
+				phone: '0965445534',
 				username: 'linh',
 				password: 'Linh@2004',
 				mail: 'mailemylinh2004@gmail.com',

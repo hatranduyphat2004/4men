@@ -72,7 +72,7 @@ function totalPrice(orders) {
 	});
 	return total;
 }
-//
+// *** SEARCH THEO MÃ ĐƠN, TÊN KH, SDT KH
 function handleSearchCart(inpEle) {
 	const accounts = JSON.parse(localStorage.getItem('accounts'));
 	let cartsOrderedInAcc = [];
@@ -100,6 +100,7 @@ function handleSearchCart(inpEle) {
 	} else
 		cartTable.innerHTML = `<tr class="cart-item"><td colspan="8" class="--color-red">KHÔNG TỒN TẠI ĐƠN HÀNG</td></tr>`;
 }
+// *** SEARCH THEO TÊN, SDT, TAI KHOAN
 function handleSearchAcc(inpEle) {
 	const accounts = JSON.parse(localStorage.getItem('accounts'));
 	let searchInp = removeVietnameseTones(inpEle.value.toLowerCase().trim());
