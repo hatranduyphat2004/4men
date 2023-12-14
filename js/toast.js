@@ -1,3 +1,4 @@
+//***PHẦN NÀY THAM KHẢO VÀ DỰA LÀM THEO
 function toast({ title = '', message = '', type = 'info', duration = 3000 }) {
 	const main = document.querySelector('#toast');
 	if (main) {

@@ -1,16 +1,10 @@
+//***PHẦN NÀY THAM KHẢO VÀ DỰA LÀM THEO
 function Validator(options) {
 	function validate(inpEle, rule) {
 		let errMess = rule.test(inpEle.value);
 		let errMessEle = inpEle.parentElement.querySelector('.form-message');
 		errMess ? (errMessEle.innerText = errMess) : (errMessEle.innerText = '');
 		//
-		let iconEle = errMessEle.parentNode.querySelector(
-			'.auth-form__body-icon'
-		);
-		if (iconEle) {
-			iconEle.classList.remove('--invalid');
-			iconEle.classList.add('--invalid');
-		}
 	}
 	function validateCheckBox(inpEle, rule) {
 		let errMess = rule.test(inpEle.checked);
@@ -18,6 +12,8 @@ function Validator(options) {
 			inpEle.parentElement.parentElement.querySelector('.form-message');
 		errMess ? (errMessEle.innerText = errMess) : (errMessEle.innerText = '');
 	}
+
+	//
 
 	let formEle = document.querySelector(options.form);
 	if (formEle) {
@@ -27,7 +23,6 @@ function Validator(options) {
 				inpEle.onblur = () => {
 					if (inpEle.attributes[0].nodeValue === 'checkbox') {
 						validateCheckBox(inpEle, rule);
-						// console.log(inpEle.checked);
 					} else validate(inpEle, rule);
 				};
 			}
@@ -50,8 +45,7 @@ Validator.isPhone = function (selector) {
 	return {
 		selector,
 		test(value) {
-			let regex = /^\d{10}$/;
-			// let regex = /^0(1d{9}|9d{8})$/;
+			let regex = /^0\d{9}$/;
 			return value.match(regex) ? undefined : 'Số điện thoại không hợp lệ';
 		},
 	};
@@ -60,9 +54,7 @@ Validator.isMail = function (selector) {
 	return {
 		selector,
 		test(value) {
-			// let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-			let regex = /^\w+([\.-]?\w+)*@gmail*(\.\w{2,3})+$/;
-			// let regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+			let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 			return value.match(regex) ? undefined : 'Trường này phải là email';
 		},
 	};
@@ -79,15 +71,6 @@ Validator.isPassword = function (selector) {
 	};
 };
 
-Validator.isPasswordNew = function (selector) {
-	return {
-		selector,
-		test(value) {
-			let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-			return value.match(regex) ? undefined : 'Mật khẩu không hợp lệ';
-		},
-	};
-};
 Validator.isConfirmPassword = function (selector) {
 	return {
 		selector,

@@ -2,92 +2,7 @@
 let products = JSON.parse(localStorage.getItem('products')).filter(
 	(item) => item.isBusiness
 );
-// *** SLIDER
-const slider = document.querySelector('.slider');
-if (slider) {
-	const sliderMain = document.querySelector('.slider-main');
-	const sliderItems = document.querySelectorAll('.slider-item');
-	const dots = document.querySelectorAll('.slider-dot-item');
-	const nextBtn = document.querySelector('.slider-next');
-	const prevBtn = document.querySelector('.slider-prev');
-	const lenItems = sliderItems.length;
-	const sliderItemWidth = sliderItems[0].offsetWidth;
-	let active = 0;
-	let posX = 0;
-	//
-	//
-	function handleChangeSlide(direction) {
-		if (direction === 1) {
-			if (active >= lenItems - 1) {
-				// active = lenItems - 1;
-				active = 0;
-				posX = 0;
-				sliderMain.style = `transform: translateX(${posX}px)`;
-				activeDot();
-				return;
-			}
-			posX -= sliderItemWidth;
-			sliderMain.style = `transform: translateX(${posX}px)`;
-			active++;
-		} else if (direction === -1) {
-			if (active <= 0) {
-				// active = 0;
-				active = lenItems - 1;
-				posX = -1 * active * sliderItemWidth;
-				sliderMain.style = `transform: translateX(${posX}px)`;
-				activeDot();
-				return;
-			}
-			posX += sliderItemWidth;
-			sliderMain.style = `transform: translateX(${posX}px)`;
-			active--;
-		}
-		activeDot();
-	}
-	nextBtn.addEventListener('click', () => {
-		clearInterval(myInterval);
-		handleChangeSlide(1);
-		myInterval = setInterval(handleAutoChangeSlide, 4000);
-	});
-	//
-	prevBtn.addEventListener('click', () => {
-		clearInterval(myInterval);
-		handleChangeSlide(-1);
-		myInterval = setInterval(handleAutoChangeSlide, 4000);
-	});
-	//
-	//
-	function handleAutoChangeSlide() {
-		if (active >= lenItems - 1) {
-			active = 0;
-			posX = -1 * active * sliderItemWidth;
-			sliderMain.style = `transform: translateX(${posX}px)`;
-			activeDot();
-		} else handleChangeSlide(1);
-	}
-	//Auto change slide
-	let myInterval = setInterval(handleAutoChangeSlide, 4000);
-	//
-	[...dots].forEach((dot) => {
-		dot.addEventListener('click', (e) => {
-			[...dots].forEach((dot) => dot.classList.remove('active'));
-			e.target.classList.add('active');
-			const indexSlide = parseInt(e.target.dataset.index);
-			active = indexSlide;
-			posX = -1 * active * sliderItemWidth;
-			sliderMain.style = `transform: translateX(${posX}px)`;
-			//
-			clearInterval(myInterval);
-			myInterval = setInterval(handleAutoChangeSlide, 4000);
-		});
-	});
 
-	// Add active dot
-	function activeDot() {
-		[...dots].forEach((dot) => dot.classList.remove('active'));
-		dots[active].classList.add('active');
-	}
-}
 // *** HTML HIỆN SẢN PHẨM
 let mainApp = `
 	<div id="main-product">
@@ -167,7 +82,7 @@ const modal = document.querySelector('#modal');
 const modalBody = document.querySelector('.modal__body');
 const btnCloseModal = document.querySelector('.modal__close');
 //
-//
+// Hiện sản phẩm thep các danh mục(bán chạy, hot, new) ở trang chủ
 const newProductsContainer = document.querySelector('.products-new-list');
 const hotProductsContainer = document.querySelector('.products-hot-list');
 const bestSellerProductsContainer = document.querySelector(
@@ -274,6 +189,76 @@ const mobileSubCategoryItems = document.querySelectorAll('.mn-sub-link');
 // menu cha
 const categoryItems = document.querySelectorAll('.nb__center-link');
 const mobileCategoryItems = document.querySelectorAll('.mn-link');
+
+// *** SHOW SẢN PHẨM THEO DANH MỤC
+function showCategory(item) {
+	item.addEventListener('click', () => {
+		let check = document.querySelector('.main-product');
+		if (!check) content.innerHTML = mainApp;
+
+		const productsContainer = document.querySelector('.product-ls');
+		const categoryHeading = document.querySelector('.filter-heading');
+		let categorySelected = item.textContent.toLowerCase();
+		let productsFiltered;
+		//
+		if (categorySelected === 'hàng mới về') {
+			productsFiltered = products.filter((pduct) => pduct.newItem);
+			categoryItemNow = productsFiltered;
+		} else {
+			productsFiltered = products.filter(
+				(pduct) =>
+					pduct.categoryMain.toLowerCase().trim() ===
+					categorySelected.trim()
+			);
+			categoryItemNow = productsFiltered;
+		}
+		//
+		categoryHeading.innerHTML = categorySelected.toUpperCase().trim();
+		//
+
+		//
+		displayListPduct(
+			productsFiltered,
+			perPage,
+			currentPage,
+			productsContainer
+		);
+		setupPagination(productsFiltered, perPage);
+		//on mobile
+		menuMobile.classList.remove('active');
+		//
+		// backToTop;
+	});
+}
+function showSubCategory(item) {
+	item.addEventListener('click', () => {
+		let check = document.querySelector('.main-product') ? true : false;
+		if (!check) content.innerHTML = mainApp;
+
+		const categorySelected = item.textContent.toLowerCase();
+		const categoryHeading = document.querySelector('.filter-heading');
+		let productsFiltered = products.filter(
+			(pduct) =>
+				pduct.category.toLowerCase().trim() === categorySelected.trim()
+		);
+
+		const productsContainer = document.querySelector('.product-ls');
+
+		categoryHeading.innerHTML = categorySelected.toUpperCase().trim();
+		//
+		categoryItemNow = productsFiltered;
+		//
+		displayListPduct(
+			productsFiltered,
+			perPage,
+			currentPage,
+			productsContainer
+		);
+		setupPagination(productsFiltered, perPage);
+		menuMobile.classList.remove('active');
+	});
+}
+
 //
 const btnLogin = document.querySelector('.tp-login');
 const btnSearch = document.querySelector('.nb__right-btn-search');
@@ -289,7 +274,6 @@ const tpUser = document.querySelector('.tp-usr');
 const tpUserName = document.querySelector('.tp-usr-name');
 const tpUserLs = document.querySelector('.tp-usr-ls');
 //
-let productsCategoryNow = []; // sp trên của danh mục hiện tai
 //
 // thanh toán
 btnPay.addEventListener('click', () => {
@@ -301,7 +285,7 @@ btnPay.addEventListener('click', () => {
 			title: 'Không thể thanh toán',
 			message: 'Hãy đăng nhập để thanh toán',
 			type: 'warning',
-			duration: 2000,
+			duration: 1500,
 		});
 	}
 });
@@ -350,7 +334,7 @@ function login() {
 				title: 'Đăng nhập thành công',
 				message: 'Đăng nhập tài khoản thành công',
 				type: 'success',
-				duration: 2000,
+				duration: 1500,
 			});
 		} else {
 			document.querySelector('.form-message.--login-fail').innerText =
@@ -442,6 +426,7 @@ function showModalLogin() {
 
 	handleShowModal();
 }
+//check xem là admin hay khách để hiện chức năng quản lí cửa hàng
 function checkLoginToShow(nameAcc) {
 	if (tpUser.classList.contains('--is-login')) {
 		tpUserName.innerHTML = nameAcc;
@@ -610,7 +595,7 @@ function handleCancelOrder(idCancel) {
 			title: 'Hủy đơn hàng',
 			message: 'Bạn đã hủy đơn hàng thành công',
 			type: 'success',
-			duration: 2000,
+			duration: 1500,
 		});
 	}
 }
@@ -843,7 +828,7 @@ function signUp() {
 				message:
 					'Đăng kí tài khoản thành công hãy đăng nhập để mua sắm thỏa thích',
 				type: 'success',
-				duration: 2000,
+				duration: 1500,
 			});
 			handleHideModal();
 		} else {
@@ -852,7 +837,7 @@ function signUp() {
 				message:
 					'Tên đăng đăng nhập hoặc số điện thoại của bạn có thể đã bị trùng vui lòng nhập lại',
 				type: 'warning',
-				duration: 2000,
+				duration: 1500,
 			});
 		}
 	} else {
@@ -882,7 +867,7 @@ function logout() {
 			title: 'Đăng xuất',
 			message: 'Đăng xuất tài khoản',
 			type: 'info',
-			duration: 2000,
+			duration: 1500,
 		});
 	}
 }
@@ -901,77 +886,13 @@ function checkLogoutToHide() {
 			`;
 	}
 }
-// *** SHOW SẢN PHẨM THEO DANH MỤC
-function showCategory(item) {
-	item.addEventListener('click', () => {
-		let check = document.querySelector('.main-product');
-		if (!check) content.innerHTML = mainApp;
-
-		const productsContainer = document.querySelector('.product-ls');
-		const categoryHeading = document.querySelector('.filter-heading');
-		let categorySelected = item.textContent.toLowerCase();
-		let productsFiltered;
-		//
-		if (categorySelected === 'hàng mới về') {
-			productsFiltered = products.filter((pduct) => pduct.newItem);
-			categoryItemNow = productsFiltered;
-		} else {
-			productsFiltered = products.filter(
-				(pduct) =>
-					pduct.categoryMain.toLowerCase().trim() ===
-					categorySelected.trim()
-			);
-			categoryItemNow = productsFiltered;
-		}
-		//
-		categoryHeading.innerHTML = categorySelected.toUpperCase().trim();
-		//
-
-		//
-		displayListPduct(
-			productsFiltered,
-			perPage,
-			currentPage,
-			productsContainer
-		);
-		setupPagination(productsFiltered, perPage);
-		//on mobile
-		menuMobile.classList.remove('active');
-		//
-		// backToTop;
-	});
-}
-function showSubCategory(item) {
-	item.addEventListener('click', () => {
-		let check = document.querySelector('.main-product') ? true : false;
-		if (!check) content.innerHTML = mainApp;
-
-		const categorySelected = item.textContent.toLowerCase();
-		const categoryHeading = document.querySelector('.filter-heading');
-		let productsFiltered = products.filter(
-			(pduct) =>
-				pduct.category.toLowerCase().trim() === categorySelected.trim()
-		);
-
-		const productsContainer = document.querySelector('.product-ls');
-
-		categoryHeading.innerHTML = categorySelected.toUpperCase().trim();
-		//
-		categoryItemNow = productsFiltered;
-		//
-		displayListPduct(
-			productsFiltered,
-			perPage,
-			currentPage,
-			productsContainer
-		);
-		setupPagination(productsFiltered, perPage);
-		menuMobile.classList.remove('active');
-	});
-}
 // *** BIẾN LƯU TRỮ DANH SÁCH SẢN PHẨM CÓ TRONG DANH MỤC HIỆN TẠI
 // *** DÙNG CHO SẮP XẾP GIÁ TĂNG/ GIẢM
 let categoryItemNow;
+// sp trên của danh mục hiện tai dùng cho lọc
+//chỉ lọc trên danh mục đang chọn
+//=>tránh trườg hợp lọc trên tất cả sản phẩm
+let productsCategoryNow = [];
 categoryItems.forEach((cateItem) => {
 	showCategory(cateItem);
 	handleBackToTop();
@@ -1046,7 +967,7 @@ function handleSearch() {
 	}
 }
 //
-// *** SHOW NHỮNG SẢN PHẨM ĐÃ THÊM VÀO GIỎ HÀNG
+// *** SHOW NHỮNG SẢN PHẨM ĐÃ THÊM VÀO GIỎ HÀNG NHỎ BÊN TRÊN PHẢI
 function renderCarts(carts) {
 	const totalQuantity = document.querySelector('.nb__right-cart-top-quantity');
 	const totalPrice = document.querySelector('.nb__right-cart-bottom-price');
@@ -1082,6 +1003,7 @@ function renderCarts(carts) {
 		cartLs.innerHTML = htmls.join('');
 		let totalQuantityPductInCart = 0;
 		let totalPricePductInCart = 0;
+		//duyệt qua giỏ hàng để tính số lượng và tổng giá giỏ hàng
 		carts.forEach((cart) => {
 			totalQuantityPductInCart += parseInt(cart.quantity);
 			totalPricePductInCart +=
@@ -1093,6 +1015,8 @@ function renderCarts(carts) {
 }
 // *** SHOW SẢN PHẨM
 function renderProducts(productList, productsContainer) {
+	//productList : danh sách sp cần hiện
+	//productsContainer : thẻ chứa danh sách cần hiện
 	let htmls = productList.map(
 		(product) =>
 			`
@@ -1157,6 +1081,7 @@ function pay() {
 			totalPrice += parseInt(cart.quantity) * parseInt(cart.price);
 			totalQuantity += parseInt(cart.quantity);
 		});
+		//tạo data cho đơn hàng
 		let data = {
 			idOrder: createIdOrder,
 			idAccount: currentAccount.id,
@@ -1171,7 +1096,7 @@ function pay() {
 			dateBuy: new Date(),
 			isConfirm: false,
 		};
-		//update local
+		//update data và sét lên local
 		let accPaid = accounts.find((acc) => acc.id === currentAccount.id);
 		accPaid.orderedCarts.push(data);
 		currentAccount.orderedCarts.push(data);
@@ -1180,14 +1105,14 @@ function pay() {
 		localStorage.setItem('currentAccount', JSON.stringify(currentAccount));
 		localStorage.setItem('accounts', JSON.stringify(accounts));
 		//
-		//
+		// thanh toán thành công thì giỏ hàng là trống
 		renderCarts([]);
 		handleHideModal();
 		toast({
 			title: 'Thanh toán thành công',
 			message: 'Bạn đã thanh toán giỏ hàng thành công',
 			type: 'success',
-			duration: 2000,
+			duration: 1500,
 		});
 	} else {
 		const inpEles = document.querySelectorAll('.pay-form-inp');
@@ -1199,8 +1124,9 @@ function pay() {
 		});
 	}
 }
-// *** SHOW NHỮNG SẢN PHẨM TRONG ĐƠN HÀNG
+// *** SHOW NHỮNG SẢN PHẨM TRONG ĐƠN HÀNG TRÊN MODAL THANH TOÁN
 function renderCartPay() {
+	//những chỉnh sửa(thêm số lượng,đổi size, hủy bỏ) sản phẩm dựa trên index của nó trong giỏ hàng
 	let products = JSON.parse(localStorage.getItem('products'));
 	let cartsPayLs = document.querySelector('.pay-right__cart-ls');
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
@@ -1273,9 +1199,7 @@ function renderCartPay() {
 			</div>
 		</div>`;
 	});
-
 	cartsPayLs.innerHTML = htmls.join('');
-	// cartsPayLs.innerHTML = htmls;
 }
 // *** UPDATE TỔNG TIÊN CỦA ĐƠN HÀNG TRONG NÚT THANH TOÁN
 function handleUpdateBtnPay(carts) {
@@ -1288,10 +1212,10 @@ function handleUpdateBtnPay(carts) {
 		'.pay-bottom-price'
 	).innerText = `${convertFormatPrice(totalPay)}`;
 }
-// ***
+// *** HIỆN THANH TOÁN
 function showModalPay() {
 	handleHideModal();
-
+	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
 	let htmls = `
 	<div class="pay">
 						<div class="pay-wp">
@@ -1315,6 +1239,7 @@ function showModalPay() {
 											class="pay-form-inp"
 											id="full-name"
 											placeholder="VD:Hà Trần Duy Phát"
+											value="${currentAccount.fullname}"
 										/>
 										<p class="form-message --color-red"></p>
 									</div>
@@ -1328,6 +1253,7 @@ function showModalPay() {
 											class="pay-form-inp"
 											id="mail"
 											placeholder="VD:demo2004@gmail.com"
+											value="${currentAccount.mail}"
 										/>
 										<p class="form-message --color-red"></p>
 									</div>
@@ -1342,6 +1268,8 @@ function showModalPay() {
 											class="pay-form-inp"
 											id="phone"
 											placeholder="VD:0123 456 789"
+											value="${currentAccount.phone}"
+
 										/>
 										<p class="form-message --color-red"></p>
 									</div>
@@ -1427,7 +1355,7 @@ function showModalPay() {
 	});
 	handleShowModal();
 }
-// ***
+// *** HIỆN CHI TIẾT SẢN PHẨM VÀ MUA HÀNG
 function showModalBuy(id) {
 	handleHideModal();
 	let pdBuy = products.filter((product) => product.id === id)[0];
@@ -1533,7 +1461,6 @@ function showModalBuy(id) {
 	modalBody.innerHTML = htmls;
 	handleShowModal();
 }
-
 // *** TẠO DỮ LIỆU GIỎ HÀNG BẰNG ID SP, SIZE, QUANTITY
 function setDataProductBuy(id, size, quantity) {
 	// const quantityContent = document.querySelector('.pq-content');
@@ -1556,6 +1483,7 @@ function setDataProductBuy(id, size, quantity) {
 	};
 	return dataAddCart;
 }
+//*** CHECK KHI THÊM SẢN PHẨM VÀO GIỎ HÀNG CÓ TRÙNG KH?
 function checkRepeatPduct(data) {
 	let cartsInCurrAcc = JSON.parse(
 		localStorage.getItem('currentAccount')
@@ -1566,12 +1494,11 @@ function checkRepeatPduct(data) {
 }
 function addCart(id) {
 	let accounts = JSON.parse(localStorage.getItem('accounts'));
-	//
-	//nếu có tk mới được thêm giỏ hàng hoặc mua
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
 	//
 	const psSelected = document.querySelector('.ps-content');
 	const pqSelected = document.querySelector('.pq-content');
+	//nếu có tk mới được thêm giỏ hàng hoặc mua
 	if (currentAccount) {
 		//lay carts trong currAcc
 		let cartsInCurrAcc = currentAccount.carts;
@@ -1580,12 +1507,13 @@ function addCart(id) {
 			psSelected.innerText,
 			pqSelected.innerText
 		);
-		//
+		// níu sản phẩm khùng trùng mã và size thì thêm vào giỏ
 		if (!checkRepeatPduct(data)) {
 			currentAccount.carts.push(data);
-			// accNow[0].carts.push(data);
 			localStorage.setItem('currentAccount', JSON.stringify(currentAccount));
-		} else {
+		}
+		//níu trùng mã và size thì tăng số lượng
+		else {
 			//trung san pham
 			cartsInCurrAcc = JSON.parse(
 				localStorage.getItem('currentAccount')
@@ -1612,20 +1540,24 @@ function addCart(id) {
 			title: 'Thêm vào giỏ hàng',
 			message: 'Đã thêm sản phẩm thành công',
 			type: 'success',
-			duration: 2000,
+			duration: 1500,
 		});
-	} else {
+	}
+	//nếu k tk thì khong cho mua
+	else {
 		toast({
 			title: 'Không thể mua sắm',
 			message: 'Hãy đăng nhập để có thể mua sắm với nhiều ưu đãi hơn ',
 			type: 'warning',
-			duration: 2000,
+			duration: 1500,
 		});
 		handleHideModal();
 	}
 }
 // *** THANH TOÁN NGAY
 function payNow(id) {
+	//khi chọn thanh toán ngay thì sẽ thanh toán luôn cả sp mới và giỏ hàng
+	//và sẽ add sp vào giỏ
 	handleHideModal();
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
 	if (currentAccount) {
@@ -1636,7 +1568,7 @@ function payNow(id) {
 			title: 'Không thể mua sắm',
 			message: 'Hãy đăng nhập để có thể mua sắm với nhiều ưu đãi hơn ',
 			type: 'warning',
-			duration: 2000,
+			duration: 1500,
 		});
 		handleHideModal();
 	}
@@ -1648,6 +1580,8 @@ function handleShowListEditSelection(item) {
 	//
 }
 function handleEditSize(index, sizeVal) {
+	// index: vị trí sp trong giỏ
+	// sizeVal: size của sp sau khi chỉnh sửa
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
 
 	currentAccount.carts[index].size = sizeVal;
@@ -1669,18 +1603,11 @@ function handleEditSize(index, sizeVal) {
 
 	`;
 }
-function showEditSizeList([...data]) {
-	return data[0]
-		.map(
-			(sz) =>
-				`<div onclick="handleEditSelected(this,${data[1]})" class="pay-right__cs-opt">${sz}</div>`
-		)
-		.join('');
-}
 function handleEditSelected(...data) {
-	// tao ra index cua san pham
-	let indexCartItem = data[1];
+	//data[0]: size sau khi chọn sửa trong list size
+	//data[1]: index của sản phẩm trong giỏ
 	let itemSzEle = data[0];
+	let indexCartItem = data[1];
 	itemSzEle.parentNode.parentNode.querySelector(
 		'.pay-right__cs-content'
 	).innerText = itemSzEle.innerText;
@@ -1700,6 +1627,17 @@ function handleEditSelected(...data) {
 			Xóa
 		</div>
 	`;
+}
+//hiển thị danh sách size mà sản phẩm đó có
+function showEditSizeList([...data]) {
+	// data[0]: danh sách size
+	//data[1]: index của sản phẩm trong giỏ
+	return data[0]
+		.map(
+			(sz) =>
+				`<div onclick="handleEditSelected(this,${data[1]})" class="pay-right__cs-opt">${sz}</div>`
+		)
+		.join('');
 }
 function showQuantity(quantity) {
 	let htmls = ``;
@@ -1733,6 +1671,7 @@ function handleShipSelected(item) {
 	// return item.innerText.trim();
 }
 function delCart(idCart) {
+	// xóa theo index của sp trong giỏ
 	if (confirm('Bạn có muốn xóa sản phẩm khỏi giỏ hàng')) {
 		let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
 		let accounts = JSON.parse(localStorage.getItem('accounts'));
@@ -1753,6 +1692,8 @@ function delCart(idCart) {
 	}
 }
 function handleEditQuantity(...data) {
+	// data[0]: số lượng sp sau khi chỉnh sửa
+	// data[1]: index của sp trong giỏ hàng
 	let quantityVal = data[0];
 	let index = data[1];
 	// cap nhat so luong san pham
@@ -1772,12 +1713,13 @@ function handleEditQuantity(...data) {
 	renderCarts(currentAccount.carts);
 	//
 	document.querySelectorAll('.pay-right__cart-opt')[index].innerHTML = `
-		<div class="pay-right__cart-done">
+		<div class="pay-right__cart-done" onclick=delCart($)>
 			Xóa
 		</div>
 	`;
 }
 function inputQuantity(index) {
+	//chỉnh sửa số lượng bằng nhập số
 	let quantityEle = document.querySelector(`#cart-${index}`);
 	let quantityVal = parseInt(quantityEle.value);
 	if (quantityVal <= 0 && quantityVal >= 10) return;
@@ -1829,109 +1771,7 @@ function incQuantity(index) {
 		</div>
 	`;
 }
-//
-// *** DÙNG CHO PHÂN TRANG
-let perPage = 12; // sp trên 1 trang
-let currentPage = 1; // trang hiện tại
-let totalPage = 0; // tổ ng trang
-let perProducts = []; // sp trên trang hiện tai
-//
-function displayListPduct(productAll, perPage, currentPage, productsContainer) {
-	let start = (currentPage - 1) * perPage;
-	let end = (currentPage - 1) * perPage + perPage;
-	productsCategoryNow = productAll;
-	perProducts = productAll.slice(start, end);
-	renderProducts(perProducts, productsContainer);
-}
-function handleChangePage(currentPage) {
-	let listPani = document.querySelectorAll('.panigation-link');
-	listPani.forEach((itemPagi) =>
-		itemPagi.parentNode.classList.remove('active')
-	);
-	listPani[currentPage].parentNode.classList.add('active');
-	//
-	let start = (currentPage - 1) * perPage;
-	let end = (currentPage - 1) * perPage + perPage;
-	perProducts = productsCategoryNow.slice(start, end);
-	let productsContainer = document.querySelector('.product-ls');
-	renderProducts(perProducts, productsContainer);
-	handleBackToTop();
-}
-function setupPagination(productAll, perPage) {
-	const panigationList = document.querySelector('.panigation-list');
-	panigationList.innerHTML = '';
-	panigationList.innerHTML += `<div class="panigation-item --pani-prev" onclick="handlePrevPage()">
-					<div class="panigation-link">
-						<i class="fa fa-angle-left"></i>
-					</div>
-			</div>`;
 
-	let page_count = Math.ceil(productAll.length / perPage);
-	for (let i = 1; i <= page_count; i++) {
-		panigationList.innerHTML += `
-				<div class="panigation-item" onclick="handleChangePage(${i})">
-						<div class="panigation-link" >${i}</div>
-				</div>
-	
-			`;
-	}
-	panigationList.innerHTML += `<div class="panigation-item" onclick="handleNextPage()">
-				<div class="panigation-link">
-					<i class="fa fa-angle-right --pani-next"></i>
-				</div>
-			</div>`;
-	//
-	//active trang hiện tại
-	document
-		.querySelectorAll('.panigation-link')[1]
-		.parentNode.classList.add('active');
-}
-function handlePrevPage() {
-	let currentPage = document.querySelector(
-		'.panigation-item.active'
-	).innerText;
-	if (currentPage === '1') return;
-	//
-	currentPage = parseInt(currentPage);
-	let start = (currentPage - 1 - 1) * perPage;
-	let end = (currentPage - 1 - 1) * perPage + perPage;
-	perProducts = productsCategoryNow.slice(start, end);
-	let productsContainer = document.querySelector('.product-ls');
-	renderProducts(perProducts, productsContainer);
-	//
-	let listPani = document.querySelectorAll('.panigation-link');
-	listPani.forEach((itemPagi) =>
-		itemPagi.parentNode.classList.remove('active')
-	);
-	document
-		.querySelectorAll('.panigation-link')
-		[currentPage - 1].parentNode.classList.add('active');
-	handleBackToTop();
-}
-function handleNextPage() {
-	let currentPage = document.querySelector(
-		'.panigation-item.active'
-	).innerText;
-	let page_count = Math.ceil(productsCategoryNow.length / perPage);
-	if (currentPage === page_count.toString()) return;
-	//
-	currentPage = parseInt(currentPage);
-	let start = (currentPage + 1 - 1) * perPage;
-	let end = (currentPage + 1 - 1) * perPage + perPage;
-	perProducts = productsCategoryNow.slice(start, end);
-	let productsContainer = document.querySelector('.product-ls');
-	renderProducts(perProducts, productsContainer);
-	//
-	let listPani = document.querySelectorAll('.panigation-link');
-	listPani.forEach((itemPagi) =>
-		itemPagi.parentNode.classList.remove('active')
-	);
-	document
-		.querySelectorAll('.panigation-link')
-		[currentPage + 1].parentNode.classList.add('active');
-	handleBackToTop();
-}
-//
 // *** DÙNG CHO SẮP XẾP
 function priceDefault(item) {
 	const productMain = document.querySelector('.product-ls');
@@ -2056,13 +1896,17 @@ function showInfoAccount() {
 	modalBody.innerHTML = htmls;
 	handleShowModal();
 }
+// *** Xác nhận đổi mk
 function handleConfirmEditPass() {
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
 	let accounts = JSON.parse(localStorage.getItem('accounts'));
+	//***mk hiện tại
 	let currPsw = document.querySelector('input[id="currpsw"]');
+	//***mk mới
 	let newPsw = document.querySelector('input[id="newpass"]');
 	let confirmPsw = document.querySelector('input[id="confirmpass"]');
 
+	//níu các trường nhập trống thì thông báo, k cho đổi, return
 	if (!(currPsw.value && newPsw.value && confirmPsw.value)) {
 		if (!currPsw.value)
 			currPsw.parentNode.querySelector('.form-message').innerText =
@@ -2075,30 +1919,40 @@ function handleConfirmEditPass() {
 				'Trường này không được để trống';
 		return;
 	}
-	//
+	//níu nhập đủ các trường nhập thì sẽ ktra....
+	// nhập mk hiện tại k đúng => tbao, return
 	if (!(currPsw.value.trim() === currentAccount.password)) {
 		currPsw.parentNode.querySelector('.form-message').innerText =
 			'Mật khẩu không đúng';
 		return;
-	} else {
+	}
+	//nhập đúng mk hiện tại
+	else {
 		if (!(newPsw.value.trim() === currentAccount.password)) {
 			if (!(newPsw.value.trim() === confirmPsw.value.trim())) {
 				confirmPsw.parentNode.querySelector('.form-message').innerText =
 					'Mật khẩu không trùng khớp';
 				return;
 			}
-		} else {
+		}
+		//mk mới k đc trùng mk cũ
+		else {
 			newPsw.parentNode.querySelector('.form-message').innerText =
 				'Mật khẩu trùng với mật khẩu cũ';
 			return;
 		}
 	}
+	//các trường đề hợp lệ thì set data lên local
 	currentAccount.password = newPsw.value.trim();
 	localStorage.setItem('currentAccount', JSON.stringify(currentAccount));
 	accounts.find((acc) => acc.id === currentAccount.id).password =
 		newPsw.value.trim();
 	localStorage.setItem('accounts', JSON.stringify(accounts));
-	//
+	//***KHI ĐỔI MK THÀNH CÔNG THÌ QUAY VỀ XEM THÔNG TIN */
+	// Có 2 cách show lại thông tin:
+	// c1: tạo lại form là fill thông tin mới vào
+	// c2: gọi lại hàm showInfoAccount, nhma bị ẩn modal xong hiện lại nhìn k mượt
+	/*
 	let accWrapper = document.querySelector('.account-wp');
 	let htmls = `
 	<div class="account-top">
@@ -2188,11 +2042,13 @@ function handleConfirmEditPass() {
 </div>
 	`;
 	accWrapper.innerHTML = htmls;
+	 */
+	showInfoAccount();
 	toast({
 		title: 'Đổi mật khẩu thành công',
 		message: 'Bạn đã đổi mật khẩu thành công',
 		type: 'success',
-		duration: 2000,
+		duration: 1500,
 	});
 }
 function handleEditPassword() {
@@ -2258,6 +2114,7 @@ function handleEditPassword() {
 		],
 	});
 }
+// *** ĐỔI CÁC THẺ P CHỨA THÔNG TIN THÀNH CÁC THẺ INPUT
 function handleEditInfo() {
 	const infoGroupEles = document.querySelectorAll('.ab-info-group');
 	infoGroupEles.forEach((infoGroupEle) => {
@@ -2364,6 +2221,7 @@ function handleConfirmEditInfo() {
 	accEdited.mail = currentAccount.mail;
 	localStorage.setItem('accounts', JSON.stringify(accounts));
 }
+//*** LẤY THÔNG TIN ACC HIỆN TẠI TRÊN LOCAL SET LẠI CHO CÁC INPUT
 function handleResetInfo() {
 	let currentAccount = JSON.parse(localStorage.getItem('currentAccount'));
 	let dataBackup = {
@@ -2545,7 +2403,3 @@ mobileCategoryItems.forEach((cateItem) => {
 mobileSubCategoryItems.forEach((cateItem) => {
 	showSubCategory(cateItem);
 });
-
-for (let index = 0; index < array.length; index++) {
-	const element = array[index];
-}

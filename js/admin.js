@@ -278,7 +278,7 @@ function handleFilterDateStatistic() {
 				new Date(item.dateBuy) <= new Date(dateTo).setHours(23, 59, 59)
 			);
 		});
-	}
+	} else if (dateFrom == '' && dateTo == '') ordersFiltered = orderedLs;
 
 	// console.log(ordersFiltered);
 	// ordersFiltered.forEach((item) => {
@@ -328,7 +328,8 @@ function handleFilterDateAcc() {
 				new Date(item.join) <= new Date(dateTo).setHours(23, 59, 59)
 			);
 		});
-	}
+	} else if (dateFrom == '' && dateTo == '') accountsFiltered = accounts;
+
 	const accountLs = contentBody.querySelector('#account-ls-body');
 	accountLs.innerHTML = '';
 	renderAccounts(accountsFiltered, accountLs);
@@ -365,12 +366,13 @@ function handleFilterDateOrder() {
 				new Date(item.dateBuy) <= new Date(dateTo).setHours(23, 59, 59)
 			);
 		});
-	}
+	} else if (dateFrom == '' && dateTo == '') ordersFiltered = orderedLs;
 	console.log(ordersFiltered);
 	const cartTable = contentBody.querySelector('#cart-ls-body');
 	cartTable.innerHTML = '';
 	renderCarts(ordersFiltered, cartTable);
 }
+//***XỬ LÍ ĐƠN HÀNG
 function handleChangeStatusCart(idLs) {
 	//idLs = [idOrder, idAccount]
 	if (confirm('Bạn đã kiểm tra kĩ đơn hàng')) {
@@ -398,6 +400,7 @@ function handleChangeStatusCart(idLs) {
 
 	// }
 }
+//SHOW TỔNG QUAN
 function showOverview() {
 	contentBody.innerHTML = '';
 	let html = `	
@@ -470,6 +473,7 @@ function showOverview() {
 	contentBody.innerHTML = html;
 	contentHeading.innerText = 'TRANG TỔNG QUAN CỦA 4MEN';
 }
+//SHOW ALL SẢN PHẨM
 function showPducts() {
 	const categories = [
 		'Áo khoác',
@@ -559,6 +563,7 @@ function showPducts() {
 	const productLs = contentBody.querySelector('.products-ls');
 	renderProducts(products, productLs);
 }
+//SHOW ALL TAI KHOAN
 function showAccs() {
 	contentHeading.innerText = 'TÀI KHOẢN CỦA 4MEN';
 	contentBody.innerHTML = '';
@@ -675,6 +680,7 @@ function showAccs() {
 	const accountTable = contentBody.querySelector('#account-ls-body');
 	renderAccounts(accounts, accountTable);
 }
+//SHOW ALL ĐƠN HÀNG
 function showBills() {
 	contentBody.innerHTML = '';
 	let html = `<div class="cart">
@@ -793,7 +799,7 @@ function showBills() {
 	console.log(orderedLs);
 	renderCarts(orderedLs, cartTable);
 }
-//
+//TỔNG SẢN PHẨM ĐANG KHI DOANH BÊN TỔNG QUAN
 function totalOrdered() {
 	let sum = 0;
 	let accounts = JSON.parse(localStorage.getItem('accounts'));
@@ -804,6 +810,7 @@ function totalOrdered() {
 	});
 	return sum;
 }
+//TỔNG SẢN PHẨM ĐÃ BÁN BÊN TỔNG QUAN
 function totalProductSold() {
 	let sum = 0;
 	const accounts = JSON.parse(localStorage.getItem('accounts'));
@@ -814,6 +821,7 @@ function totalProductSold() {
 	});
 	return sum;
 }
+//TỔNG DOANH THU BÊN TỔNG QUAN
 function totalRevenue() {
 	let sum = 0;
 	let accounts = JSON.parse(localStorage.getItem('accounts'));
@@ -1011,7 +1019,10 @@ function showStatistic() {
 	renderStatistic(listStatistic, statisticTable);
 }
 // tao mang dung cho thong ke
+//duyệt qua từng đơn hàng của từng acc để
+//lấy ds sp đã mua được  return để truyển qua tham số "arr" trong hàm "listProductsSold"
 function productsInOrdered(accounts) {
+	//do ban đầu đóng gói d liệu phức tạp nên dùng nhiều forEach và flat(làm phẳng mảng)
 	let list = [];
 	accounts.forEach((acc) => {
 		acc.orderedCarts.forEach((order) => {
@@ -1020,10 +1031,16 @@ function productsInOrdered(accounts) {
 			}
 		});
 	});
-
-	console.log(list.flat());
 	return list.flat();
 }
+//***tạo mới 1 danh sach "listResult" chứa tất cả sp đang kinh doanh
+//hasSold= false(chưa bán sp nào)
+//
+//duyệt qua từng đơn hàng của từng acc để
+//lấy ds sp đã mua được truyền qua tham số "arr"
+//
+//nếu sp nào dã bán ra thì tăng số lượng bán ra và set hasSold = true của sp đó
+//trong "listResult" để thống kê
 function listProductsSold(arr) {
 	let listResult = [];
 	let products = JSON.parse(localStorage.getItem('products'));
@@ -1172,6 +1189,8 @@ function showDetailCart(idOrder) {
 }
 //
 function renderStatistic(productsShow, productsContainer) {
+	//productsShow:danh sách cần hiển thị
+	//productsContainer: chứa danh sách cần hiển thị
 	let htmls = productsShow.map((product, index) => {
 		return `
 		<tr class="statistic-item">
@@ -1201,6 +1220,8 @@ function renderStatistic(productsShow, productsContainer) {
 }
 //
 function renderCarts(cartsShow, cartsContainer) {
+	//cartsShow:danh sách cần hiển thị
+	//cartsContainer: chứa danh sách cần hiển thị
 	let htmls = cartsShow.map((cart, index) => {
 		let statusEle = cart.isConfirm
 			? `
@@ -1245,6 +1266,8 @@ function renderCarts(cartsShow, cartsContainer) {
 }
 //
 function renderProducts(productsShow, productsContainer) {
+	//productsShow:danh sách cần hiển thị
+	//productsContainer: chứa danh sách cần hiển thị
 	let htmls = productsShow.map((product) => {
 		let newItemEle = product.newItem
 			? `
@@ -1330,6 +1353,8 @@ function renderProducts(productsShow, productsContainer) {
 }
 //
 function renderAccounts(accountsShow, accountsContainer) {
+	//accountsShow:danh sách cần hiển thị
+	//accountsContainer: chứa danh sách cần hiển thị
 	let htmls = accountsShow.map((account, index) => {
 		let editEle = account.status
 			? `
@@ -1539,6 +1564,7 @@ function handleEditAccount(id) {
 		});
 	}
 }
+// XÓA VĨNH VIỄN TK( DO NHÂN VIÊN BỊ ĐUỔI, KHÁCH CỤC SUC)
 function handleDelAccount(id) {
 	if (confirm('Bạn có muốn xóa tài khoản này?')) {
 		let accounts = JSON.parse(localStorage.getItem('accounts'));
@@ -1548,6 +1574,7 @@ function handleDelAccount(id) {
 		showAccs();
 	}
 }
+// TẠM NGƯNG TÀI KHOẢN (DO NHÂN VIÊN NGHỈ VIỆC NHƯNG CÓ Í ĐỊNH QUAY LẠI, KHÁCH TẠM HẾT TIỀN)
 function handleCancelAccount(id) {
 	if (confirm('Bạn có muốn tạm ngưng tài khoản sản phẩm này?')) {
 		let accounts = JSON.parse(localStorage.getItem('accounts'));
@@ -1556,6 +1583,7 @@ function handleCancelAccount(id) {
 		showAccs();
 	}
 }
+// KHÔI PHỤC TÀI KHOẢN
 function handleRecoveryAccount(id) {
 	if (confirm('Bạn có muốn khôi phục tài khoản sản phẩm này?')) {
 		let accounts = JSON.parse(localStorage.getItem('accounts'));
@@ -2247,13 +2275,14 @@ function showEditProduct(id) {
 	handleShowModal();
 }
 //
-//
+// RESET LẠI THÔNG TIN KHI SỬA THÔNG
 function handleResetProduct(id) {
 	showEditProduct(id);
 	handleShowModal();
 }
 //
-//
+//*** NGƯNG KINH DOANH SẢN
+// set key "isBusiness: false"
 function handleStopBusinessProduct(id) {
 	if (confirm('Bạn có chắc chắn ngừng kinh doanh sản phẩm này?')) {
 		let products = JSON.parse(localStorage.getItem('products'));
@@ -2262,7 +2291,9 @@ function handleStopBusinessProduct(id) {
 		showPducts();
 	}
 }
-//
+// *** KINH DOANH LẠI SẢN PHẨM ĐÃ NGƯNG
+// set key "isBusiness: true"
+
 function handleRecoveryProduct(id) {
 	if (confirm('Bạn có chắc chắn khôi phục sản phẩm này?')) {
 		let products = JSON.parse(localStorage.getItem('products'));
@@ -2286,6 +2317,7 @@ function handleDelProduct(id) {
 	}
 }
 
+//set name admin và avt
 window.onload = () => {
 	let currentUser = JSON.parse(localStorage.getItem('currentAccount'));
 	adminName.innerText = currentUser.fullname;
@@ -2311,11 +2343,8 @@ function handleHideModal() {
 	modal.classList.toggle('hide');
 	modal.classList.remove('open');
 }
-// function handleEdit() {}
-// function handleDelete() {}
-// function handleRecovery() {}
+//***PHẦN NÀY THAM KHẢO VÀ DỰA LÀM THEO
 
-//
 // Create id new product
 function createIdProduct() {
 	let totalQuantity = 0;
